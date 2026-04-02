@@ -1,62 +1,75 @@
 # mcpaas
 
-[![npm](https://img.shields.io/npm/v/mcpaas)](https://www.npmjs.com/package/mcpaas)
+[![npm](https://img.shields.io/npm/v/mcpaas?color=00CCFF)](https://www.npmjs.com/package/mcpaas)
 [![MCPaaS](https://mcpaas.live/badge/Wolfe-Jam/mcpaas-sdk.svg)](https://mcpaas.live)
+[![Built with Bun](https://img.shields.io/badge/Built_with-Bun-f9f1e1?logo=bun)](https://bun.sh)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-Typed TypeScript client for [MCPaaS](https://mcpaas.live) — the platform for AI context delivery.
+**AI context has an API. This is the client.**
 
-Zero dependencies. Works everywhere `fetch` does: Bun, Node 18+, Deno, browsers, edge runtimes.
+Every soul, score, namepoint, tag, and edge location on [MCPaaS](https://mcpaas.live) — typed, zero-dep, one import.
 
-## Try It
+```typescript
+import { MCPaaS } from 'mcpaas';
+const mcpaas = new MCPaaS();
 
-```bash
-bunx bun -e "import { MCPaaS } from './src'; const m = new MCPaaS(); console.log(await m.getRawSoul('spacex'))"
+const soul = await mcpaas.getRawSoul('spacex');
 ```
+
+That's a live API call. Run it. You'll get SpaceX context back in ~50ms from the nearest Cloudflare edge.
+
+---
 
 ## Install
 
 ```bash
-bun add mcpaas
-# or
-npm install mcpaas
+bun add mcpaas                     # Bun-native
+npm install mcpaas                 # Also works with Node 18+, Deno, browsers, edge runtimes
 ```
+
+---
+
+## What MCPaaS Does
+
+MCPaaS is a context delivery platform running on 300+ Cloudflare edges.
+
+| Concept | What it is |
+|---------|-----------|
+| **Soul** | A block of AI context — project DNA, persona, live data |
+| **Namepoint** | A claimed handle in a global directory (like DNS for context) |
+| **Score** | AI-readiness rating for a repo or namepoint (0-100) |
+| **Tag Intel** | Pattern detection and co-occurrence analysis across all namepoints |
+| **Globe** | Real-time execution stats from every edge location |
+| **Badge** | SVG score badge for any GitHub repo |
+
+This SDK wraps the public HTTP API into typed methods with full IntelliSense.
+
+---
 
 ## Quick Start
 
 ```typescript
 import { MCPaaS } from 'mcpaas';
 
-const m = new MCPaaS();
+const mcpaas = new MCPaaS();
 
-// Read live AI context (a "soul")
-const spacex = await m.getRawSoul('spacex');
-// => "SpaceX — Founded 2002 by Elon Musk..."
+// Read live AI context
+const soul = await mcpaas.getRawSoul('spacex');
 
-// Score any GitHub repo's AI-readiness
-const repo = await m.scoreRepo('anthropics/claude-code');
-// => { score: 72, repo: "anthropics/claude-code", language: "TypeScript", ... }
+// Score a GitHub repo's AI-readiness
+const repo = await mcpaas.scoreRepo('anthropics/claude-code');
+console.log(repo.score, repo.language);
 
 // Check if a namepoint handle is available
-const check = await m.check('myhandle');
-// => { handle: "myhandle", available: true, price: "$2/month" }
+const check = await mcpaas.check('myhandle');
+console.log(check.available);
 
-// Get tag intelligence across 700+ namepoints
-const intel = await m.tagIntel();
-// => { tags: [...], candidates: [...], merges: [...], analysed: 721 }
+// Tag intelligence across the entire directory
+const intel = await mcpaas.tagIntel();
+console.log(intel.tags.length, 'tag profiles');
 ```
 
-## What MCPaaS Does
-
-MCPaaS delivers AI context at 300+ Cloudflare edges in sub-millisecond time. The platform provides:
-
-- **Souls** — persistent AI context blocks (project DNA, personas, live data)
-- **Namepoints** — claimed handles in a global directory (like DNS for AI context)
-- **Scoring** — AI-readiness scores for repos and namepoints
-- **Tag Intel** — pattern detection, co-occurrence analysis, and tag suggestions
-- **Globe** — real-time execution stats from 300+ edge locations
-- **Badges** — SVG badges for any GitHub repo's score
-
-This SDK wraps all 15 public endpoints into typed methods with full IntelliSense.
+---
 
 ## API Reference
 
@@ -99,7 +112,7 @@ This SDK wraps all 15 public endpoints into typed methods with full IntelliSense
 | `badge(owner, repo)` | `string` | SVG badge URL (synchronous) |
 
 ```typescript
-m.badge('Wolfe-Jam', 'faf-cli')
+mcpaas.badge('Wolfe-Jam', 'faf-cli')
 // => "https://mcpaas.live/badge/Wolfe-Jam/faf-cli.svg"
 ```
 
@@ -107,7 +120,7 @@ m.badge('Wolfe-Jam', 'faf-cli')
 
 | Method | Returns | Description |
 |--------|---------|-------------|
-| `globe()` | `Promise<GlobeResult>` | Edge location execution stats from 300+ Cloudflare colos |
+| `globe()` | `Promise<GlobeResult>` | Edge location stats from 300+ Cloudflare colos |
 
 ### Platform
 
@@ -116,13 +129,7 @@ m.badge('Wolfe-Jam', 'faf-cli')
 | `health()` | `Promise<HealthResult>` | Service health + engine status |
 | `info()` | `Promise<InfoResult>` | Server name and version |
 
-## Configuration
-
-```typescript
-const m = new MCPaaS({
-  baseUrl: 'https://mcpaas.live',  // default
-});
-```
+---
 
 ## Error Handling
 
@@ -132,7 +139,7 @@ All methods throw `MCPaaSError` on non-2xx responses:
 import { MCPaaS, MCPaaSError } from 'mcpaas';
 
 try {
-  await m.getSoul('nonexistent');
+  await mcpaas.getSoul('nonexistent');
 } catch (e) {
   if (e instanceof MCPaaSError) {
     e.status  // 404
@@ -142,20 +149,49 @@ try {
 }
 ```
 
-## TypeScript
+## Exported Types
 
-All response types are exported for use in your own code:
+All response types are exported:
 
 ```typescript
 import type { ScoreResult, DirectoryEntry, TagIntelResult } from 'mcpaas';
 ```
 
+## Configuration
+
+```typescript
+const mcpaas = new MCPaaS({
+  baseUrl: 'https://mcpaas.live',  // default
+});
+```
+
+---
+
+## Internals
+
+Single file. 250 lines. Zero dependencies. Native `fetch` only.
+
+```
+src/index.ts     ← Types + MCPaaS class + MCPaaSError (that's it)
+tests/sdk.test.ts ← 19 tests against live mcpaas.live
+```
+
+Built with Bun. Tested with Bun. Works anywhere `fetch` does.
+
+---
+
+## Why Bun?
+
+Bun powers Claude Code. This SDK follows the same toolchain — `bun build`, `bun test`, TypeScript-native. No transpiler config, no bundler plugins, no runtime dependencies.
+
+Node, Deno, browsers, and edge runtimes work too. But Bun is home.
+
+---
+
 ## License
 
 MIT
 
-## Links
+---
 
-- [MCPaaS Platform](https://mcpaas.live)
-- [API Dashboard](https://mcpaas.live/souls/stats)
-- [GitHub](https://github.com/Wolfe-Jam/mcpaas-sdk)
+Built by [Wolfe James](https://github.com/Wolfe-Jam) | Powered by [MCPaaS](https://mcpaas.live) | Format: [FAF](https://faf.one)
