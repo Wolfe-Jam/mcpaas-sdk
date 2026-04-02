@@ -1,0 +1,29 @@
+{
+  "name": "mcpaas",
+  "version": "1.0.0",
+  "description": "MCPaaS SDK — Context, on-demand. Read souls, score repos, discover tags, query the globe.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "bun build src/index.ts --outdir dist --target node && bun x tsc --emitDeclarationOnly",
+    "test": "bun test",
+    "prepublishOnly": "bun run build"
+  },
+  "keywords": ["mcpaas", "faf", "ai-context", "mcp", "souls", "scoring", "tag-intel"],
+  "author": "wolfejam <wolfejam@faf.one>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Wolfe-Jam/mcpaas-sdk"
+  },
+  "homepage": "https://mcpaas.live",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/bun": "latest"
+  }
+}
