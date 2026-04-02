@@ -1,6 +1,7 @@
 # mcpaas
 
 [![npm](https://img.shields.io/npm/v/mcpaas?color=00CCFF)](https://www.npmjs.com/package/mcpaas)
+[![FAF](https://mcpaas.live/badge/Wolfe-Jam/mcpaas-sdk.svg)](https://mcpaas.live)
 [![Built with Bun](https://img.shields.io/badge/Built_with-Bun-f9f1e1?logo=bun)](https://bun.sh)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
