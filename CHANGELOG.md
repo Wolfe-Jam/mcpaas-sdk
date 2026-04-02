@@ -2,9 +2,11 @@
 
 ## 1.0.2
 
-- Fixed "Try It" example to use installed package path
-- Added CHANGELOG.md (was missing from v1.0.0 and v1.0.1)
-- Full /pubpro protocol compliance
+- Fixed `scoreRepo()` sending wrong field name (`repo` → `url`)
+- Rewrote README: Bun-first identity, "Why Bun?" section, real examples, ecosystem footer
+- Removed non-Mk4 badge (only Mk4 engine scores are valid)
+- Added CHANGELOG.md
+- First /pubpro protocol release
 
 ## 1.0.1
 
