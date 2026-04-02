@@ -1,6 +1,6 @@
 {
   "name": "mcpaas",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "MCPaaS SDK — Context, on-demand. Read souls, score repos, discover tags, query the globe.",
   "type": "module",
   "main": "dist/index.js",

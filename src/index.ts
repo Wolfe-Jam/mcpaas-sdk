@@ -187,7 +187,7 @@ export class MCPaaS {
     return this.json('/api/play/score', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ repo }),
+      body: JSON.stringify({ url: repo }),
     });
   }
 

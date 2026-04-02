@@ -29,7 +29,7 @@ human_context:
   what: MCPaaS SDK — Context, on-demand. Read souls, score repos, discover tags, query the globe.
   why: Eliminates hand-rolled HTTP calls — typed SDK wraps 15 public MCPaaS endpoints
   where: npm (mcpaas), GitHub (Wolfe-Jam/mcpaas-sdk), consumed via mcpaas.live
-  when: v1.0.0, 2026-04-02
+  when: v1.0.2, 2026-04-02
   how: npm install mcpaas && import { MCPaaS } from 'mcpaas'
 monorepo:
   packages_count: slotignored
