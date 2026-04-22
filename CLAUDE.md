@@ -1,3 +1,11 @@
+---
+mcpaas:
+  role: sdk
+  depends_on: [mcpaas.live/raw, mcpaas.live/api, mcpaas.live/mcp]
+  capabilities: [souls-read, repo-scoring, tag-discovery, globe-query]
+  siblings: [mcpaas-cf, mcpaas-beacon]
+---
+
 <!-- faf: mcpaas | TypeScript | MCPaaS SDK — Context, on-demand. Read souls, score repos, discover tags, query the globe. -->
 
 # CLAUDE.md — mcpaas
